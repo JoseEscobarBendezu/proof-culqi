@@ -1,106 +1,145 @@
+import { validationBodyRequest } from '../api/token';
+
+const body = {
+  card_number: '12345678901234',
+  cvv: '123',
+  expiration_month: '12',
+  expiration_year: '2023',
+  email: 'correo@hotmail.com'
+};
+
+
 describe('validation request body', () => {
-  test('request is null, undefined or empty', () => {
+  it('request is null, undefined or empty', () => {
     const expected = 'request is not valid';
-    const recibedNull = null;
-    expect(recibedNull).toStrictEqual(expected);
-    const recibedUndefined = undefined;
-    expect(recibedUndefined).toStrictEqual(expected);
-    const recibedEmpty = {};
-    expect(recibedEmpty).toStrictEqual(expected);
-  });
-  test('request with one param empty', () => {
-    const expected = 'request is not valid';
-    const recibed = {
-      card_number: 'card_number',
-      expiration_month: 'expiration_month',
-      expiration_year: 'expiration_year',
-      email: 'email'
-    };
-    expect(recibed).toStrictEqual(expected);
+    expect(() => {
+      return validationBodyRequest(null);
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest(undefined);
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({});
+    }).toThrowError(expected);
   });
 });
 
 describe('validation params of request', () => {
-  test('Card number is not valid', () => {
+  it('Card number is not valid', () => {
     const expected = 'card_number is not valid';
-    const recibedLess13 = 'card<13';
-    expect(recibedLess13).toStrictEqual(expected);
-    const recibedMore16 = 'card>26';
-    expect(recibedMore16).toStrictEqual(expected);
-    const recibedUndefined = undefined;
-    expect(recibedUndefined).toStrictEqual(expected);
-    const recibedNotNumber = 'notNumber';
-    expect(recibedNotNumber).toStrictEqual(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, card_number: '123456789012' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, card_number: '12345678901234567' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, card_number: undefined });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, card_number: null });
+    }).toThrowError(expected);
+    // const recibedNotNumber = 'notNumber';
+    // expect(() => recibedNotNumber).toThrowError(expected);
   });
-  test('CVV is not valid', () => {
+  it('CVV is not valid', () => {
     const expected = 'cvv is not valid';
-    const recibedLess3 = 'cvv<3';
-    expect(recibedLess3).toStrictEqual(expected);
-    const recibedMore4 = 'cvv>4';
-    expect(recibedMore4).toStrictEqual(expected);
-    const recibedUndefined = undefined;
-    expect(recibedUndefined).toStrictEqual(expected);
-    const recibedNotNumber = 'notNumber';
-    expect(recibedNotNumber).toStrictEqual(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, cvv: '12' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, cvv: '12345' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, cvv: undefined });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, cvv: null });
+    }).toThrowError(expected);
+    // const recibedNotNumber = 'notNumber';
+    // expect(() => recibedNotNumber).toThrowError(expected);
   });
-  test('Expiration month is not valid', () => {
+  it('Expiration month is not valid', () => {
     const expected = 'expiration_month is not valid';
-    const recibedLenghtLess1 = 'expiration_month<1';
-    expect(recibedLenghtLess1).toStrictEqual(expected);
-    const recibedLengthMore2 = 'expiration_month>2';
-    expect(recibedLengthMore2).toStrictEqual(expected);
-    const recibedLess1 = 'expiration_month<1';
-    expect(recibedLess1).toStrictEqual(expected);
-    const recibedMore12 = 'expiration_month>2';
-    expect(recibedMore12).toStrictEqual(expected);
-    const recibedEmpty = '';
-    expect(recibedEmpty).toStrictEqual(expected);
-    const recibedUndefined = undefined;
-    expect(recibedUndefined).toStrictEqual(expected);
-    const recibedNotString = 'notString';
-    expect(recibedNotString).toStrictEqual(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_month: '' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_month: '123' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_month: '13' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_month: '0' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_month: undefined });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_month: null });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_month: 1 });
+    }).toThrowError(expected);
   });
-  test('Expiration year is not valid', () => {
+  it('Expiration year is not valid', () => {
     const expected = 'expiration_year is not valid';
-    const recibedLenghtLess4 = 'expiration_year<4';
-    expect(recibedLenghtLess4).toStrictEqual(expected);
-    const recibedLengthMore4 = 'expiration_year>4';
-    expect(recibedLengthMore4).toStrictEqual(expected);
-    const recibedLessActualYear = 'expiration_year<2022';
-    expect(recibedLessActualYear).toStrictEqual(expected);
-    const recibedMoreActualYear5 = 'expiration_year>2027';
-    expect(recibedMoreActualYear5).toStrictEqual(expected);
-    const recibedEmpty = '';
-    expect(recibedEmpty).toStrictEqual(expected);
-    const recibedUndefined = undefined;
-    expect(recibedUndefined).toStrictEqual(expected);
-    const recibedNotString = 'notString';
-    expect(recibedNotString).toStrictEqual(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: '' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: '12345' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: '133' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: '2021' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: '2028' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: undefined });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: null });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, expiration_year: 2022 });
+    }).toThrowError(expected);
   });
-  test('Email is not valid', () => {
+  it('Email is not valid', () => {
     const expected = 'email is not valid';
-    const recibedLenghtLess5 = 'email<5';
-    expect(recibedLenghtLess5).toStrictEqual(expected);
-    const recibedLengthMore100 = 'email>100';
-    expect(recibedLengthMore100).toStrictEqual(expected);
-    const recibedNotValidDomain = 'email@notvaliddomanin';
-    expect(recibedNotValidDomain).toStrictEqual(expected);
-    const recibedEmpty = '';
-    expect(recibedEmpty).toStrictEqual(expected);
-    const recibedUndefined = undefined;
-    expect(recibedUndefined).toStrictEqual(expected);
-    const recibedNotString = 'notString';
-    expect(recibedNotString).toStrictEqual(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, email: '1234' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, email: 'correoqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq@hotmail.com' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, email: 'correo@invalid.domain' });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, email: undefined });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, email: null });
+    }).toThrowError(expected);
+    expect(() => {
+      return validationBodyRequest({ ...body, email: 2022 });
+    }).toThrowError(expected);
   });
 });
 
 describe('Request response', () => {
-  test('Resquest is valid response token', () => {
+  it('Resquest is valid response token', () => {
     const expected = 'token';
     const recibed = 'token';
     expect(recibed).toStrictEqual(recibed);
   });
-  test('Internarl error', () => {
+  it('Internarl error', () => {
     const expected = 'internal error';
     const recibed = 'internal error';
     expect(recibed).toStrictEqual(recibed);
