@@ -1,0 +1,12 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "collectCoverage": true,
+  "testMatch": [
+    "**/?(*.)+(spec).ts"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "/dist/"
+  ]
+}
