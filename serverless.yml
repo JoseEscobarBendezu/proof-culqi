@@ -21,6 +21,13 @@ functions:
       - http:
           method: POST
           path: /token
+  getCard:
+    handler: ./dist/api/card.getCard
+    events:
+      - http:
+          method: GET
+          path: /card/{token}
+
 resources:
   Resources:
     CrediCard:
