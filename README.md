@@ -5,6 +5,7 @@
 - [Requirements](#Requirements)
 - [Commands](#Commands)
 - [Files](#Files)
+- [Test](#Test)
 
 ## Requirements
 
@@ -24,6 +25,7 @@ npm run test  // for test coverage code "jest -c ./jest.unit.json"
 
 ```text
 dist/
+postman/
 src/
 ├── api/
 │   ├── card.ts
@@ -42,6 +44,11 @@ tsconfig.json
 ```
 
 - dist/ is file for transpile code to javascript
+- postman/ is examples for request on postman.json format
 - src/ is root file for this project
 - serverless.yml document for configuration on serverless
 - tsconfig.json is config for transpile code from typescript
+
+## Test
+
+For testing and examples, find postman File and import json file on postam with import menu

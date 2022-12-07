@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "b871fc62-32f5-4f38-ac9a-95ce7f6d380b",
+		"name": "Culqui",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12109840"
+	},
+	"item": [
+		{
+			"name": "Create Token ( local )",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "card_number",
+							"value": "12345678911234",
+							"type": "text"
+						},
+						{
+							"key": "cvv",
+							"value": "128",
+							"type": "text"
+						},
+						{
+							"key": "expiration_month",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "expiration_year",
+							"value": "2024",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "email@hotmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Token Serverless",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "card_number",
+							"value": "12345678911234",
+							"type": "text"
+						},
+						{
+							"key": "cvv",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "expiration_month",
+							"value": "12",
+							"type": "text"
+						},
+						{
+							"key": "expiration_year",
+							"value": "2022",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "email@hotmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://85v807y2s5.execute-api.us-east-1.amazonaws.com/dev/token",
+					"protocol": "https",
+					"host": [
+						"85v807y2s5",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Card (local)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/dev/card/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"card",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Card",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/dev/card/7138cc255fb64289",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dev",
+								"card",
+								"7138cc255fb64289"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "content-length",
+							"value": "182"
+						},
+						{
+							"key": "accept-ranges",
+							"value": "bytes"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 00:07:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"value\": {\n        \"message\": \"card finded !!!\",\n        \"input\": \"Credit Card: {\\\"expiration_year\\\":\\\"2022\\\",\\\"expiration_month\\\":\\\"12\\\",\\\"card_number\\\":\\\"12345678911234\\\"}\"\n    },\n    \"replacer\": null,\n    \"space\": 2\n}"
+				},
+				{
+					"name": "Get Card",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/dev/card/1670364746846",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dev",
+								"card",
+								"1670364746846"
+							]
+						}
+					},
+					"status": "Payment Required",
+					"code": 402,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "content-length",
+							"value": "91"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 00:07:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"value\": {\n        \"message\": \"Credit card not finded\",\n        \"input\": \"response\"\n    },\n    \"replacer\": null,\n    \"space\": 2\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Card Serverless",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/dev/card/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"card",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Card",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/dev/card/7138cc255fb64289",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dev",
+								"card",
+								"7138cc255fb64289"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "content-length",
+							"value": "182"
+						},
+						{
+							"key": "accept-ranges",
+							"value": "bytes"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 00:07:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"value\": {\n        \"message\": \"card finded !!!\",\n        \"input\": \"Credit Card: {\\\"expiration_year\\\":\\\"2022\\\",\\\"expiration_month\\\":\\\"12\\\",\\\"card_number\\\":\\\"12345678911234\\\"}\"\n    },\n    \"replacer\": null,\n    \"space\": 2\n}"
+				},
+				{
+					"name": "Get Card",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/dev/card/1670364746846",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"dev",
+								"card",
+								"1670364746846"
+							]
+						}
+					},
+					"status": "Payment Required",
+					"code": 402,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-cache"
+						},
+						{
+							"key": "content-length",
+							"value": "91"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Dec 2022 00:07:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"value\": {\n        \"message\": \"Credit card not finded\",\n        \"input\": \"response\"\n    },\n    \"replacer\": null,\n    \"space\": 2\n}"
+				}
+			]
+		}
+	]
+}
